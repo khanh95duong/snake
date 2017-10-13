@@ -1,5 +1,6 @@
 window.addEventListener("keydown", move, false);
 var canvas = document.getElementById("myCanvas");
+var img = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 var snakeSize = 25;
 var foodSize = 25;
@@ -10,6 +11,7 @@ var game = true;
 var fed = false;
 // Is the game over
 var over = false;
+var fadeOnce = false;
 
 // Snake Location
 var x = 0;
@@ -157,67 +159,89 @@ function draw() {
 // This will handle the out of bounds stuff
 function youLose() {
 	if (!over) {	
-		alert("out");
+		//alert("out");
 		over = true;
+		document.getElementById("game").src = "images/victory.jpg";
+		//$("#game").fadeIn("slow");
+		//$("#game").fadeIn();
 	}
 }
 
-function fade() {
-	$("game").fadeIn();
+function unfade(element) {
+    var op = 0.1;  // initial opacity
+    element.style.display = 'block';
+    var timer = setInterval(function () {
+        if (op >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op += op * 0.1;
+    }, 10);
 }
 
 function update() {
-	
-	if (bodies[0].px === foodX && bodies[0].py === foodY) {
-		foodX = Math.floor(Math.random() * swidth);
-		foodY = Math.floor(Math.random() * sheight);
-		fed = true;
-	}
+	if (!over) {
+		if (bodies[0].px === foodX && bodies[0].py === foodY) {
+			foodX = Math.floor(Math.random() * swidth);
+			foodY = Math.floor(Math.random() * sheight);
+			fed = true;
+		}
 
-    if (fed) {
-		drawFoods();
-        fed = false;
-        for (i = 0; i < 5; i++) {
-            var newBody = {
-                bx: -100,
-                by: -100,
-                px: -100,
-                py: -100
-            }
-            bodies[bodies.length] = newBody;
-        }
-    }
-    switch (direction) {
-        case 1:
-			if (y === 0) youLose();
-            y -= 25;
-            break;
-        case 2:
-            x += 25;
-			if (x === swidth) youLose();
-            break;
-        case 3:
-            y += 25;
-			if (y === sheight) youLose();
-            break;
-        case 4:
-			if (x === 0) youLose();
-            x -= 25;
-            break;
-    }
-    draw();
+		if (fed) {
+			drawFoods();
+			fed = false;
+			for (i = 0; i < 5; i++) {
+				var newBody = {
+					bx: -100,
+					by: -100,
+					px: -100,
+					py: -100
+				}
+				bodies[bodies.length] = newBody;
+			}
+		}
+		switch (direction) {
+			case 1:
+				if (y === 0) youLose();
+				y -= 25;
+				break;
+			case 2:
+				x += 25;
+				if (x === swidth) youLose();
+				break;
+			case 3:
+				y += 25;
+				if (y === sheight) youLose();
+				break;
+			case 4:
+				if (x === 0) youLose();
+				x -= 25;
+				break;
+		}
+		draw();
+	}
+	else {
+		if (!fadeOnce) {
+			fadeOnce = true;
+			unfade(img);
+		}
+	}
+	
 }
 
 function init() {
     if (direction == null) {
         direction = 3;
-        setInterval("update()", 100);
-        var newBody = {
-            bx: -100,
-            by: -100,
-            px: -100,
-            py: -100
-        }
-        bodies[0] = newBody;
+		setInterval("update()", 100);
+		var newBody = {
+			bx: -100,
+			by: -100,
+			px: -100,
+			py: -100
+		}
+		bodies[0] = newBody;	
+		
+        
     }
 }
