@@ -22,20 +22,18 @@
 				<span id="elem" class="shape trail"></span> 
 			</div>
 		</div>
-		<div id="box">
-			<div id="container">
-				<img id="gameLost" src="images/lose.png" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
-				<img id="gameWon" src="images/won.jpg" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
-				<canvas id="myCanvas" width="500" height="500" style="border: 2px solid black"></canvas>
-			</div>
-			<br />
-			<button id='btn' onclick="init()">START!</button>
-			<script src="snake.js"></script>
-			
-			<div id="score">
-				<h2 id="scoreTracker">Score: 0</h2>
-				<h2 id="bonusTracker">Time Bonus: 30000</h2>
-			</div>
+		<div id="container">
+			<img id="gameLost" src="images/lose.png" alt="_blank" onclick="reLoad()" style="z-index: 10; display: none;"/>
+			<img id="gameWon" src="images/won.jpg" alt="_blank" onclick="reLoad()" style="z-index: 10; display: none;"/>
+			<canvas id="myCanvas" width="500" height="500" style="border: 2px solid black"></canvas>
+		</div>
+		<br />
+		<button id='btn' onclick="init()">START!</button>
+		<script src="snake.js"></script>
+		
+		<div id="score">
+			<h2 id="scoreTracker">Score: 0</h2>
+			<h2 id="bonusTracker">Time Bonus: 30000</h2>
 		</div>
 		
 	</article>

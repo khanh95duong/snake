@@ -12,6 +12,7 @@ var game = true;
 var fed = false;
 // Is the game over
 var over = false;
+var loss = false;
 var fadeOnce = false;
 var alreadyMove = false;
 
@@ -197,6 +198,7 @@ function youLose() {
 	elapsed = new Date() - start;
 	if (!over) {	
 		over = true;
+		loss = true;
 	}
 }
 
@@ -212,6 +214,8 @@ function unfade(element) {
         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
         op += op * 0.1;
     }, 10);
+	
+	$("#myCanvas").hide();
 }
 
 function win() {
@@ -219,7 +223,7 @@ function win() {
 }
 
 function update() {
-	if (!over) {
+	if (!over && !loss) {
 		alreadyMove = false;
 		// The Eat
 		if (bodies[0].px === foodX && bodies[0].py === foodY) {
@@ -281,7 +285,7 @@ function update() {
 			}
 		}
 	}
-	else {
+	else if (loss){
 		if (!fadeOnce) {
 			fadeOnce = true;
 			unfade(img2);
