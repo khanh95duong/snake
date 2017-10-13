@@ -9,3 +9,14 @@ Our program deserves 100 points because we used HTML5, CSS3, and JavaScript prop
 containing everything, the style sheets are easy to read, and the script is properly commented. All three validation
 tests pass. The game is contains no errors and provides a hard experience for the player. The HighScore API was incorperated 
 correctly and a readme was submitted with this assignment.
+
+CSS FEATURES
+	Text effect on the title.
+	An animation above the canvas.
+	Transition on the start button.
+	
+JAVASCRIPT LIB
+	We used JQuery
+	
+BEAR TO IMPLEMENT
+	The food was the hardesnt to iimplement. We had to spawn the food on the correct tile so the snack can eat it.
