@@ -3,7 +3,7 @@ footer img {
     width: 80px;
 }
 
-#game{
+#gameLost, #gameWon{
 	width: 525px;
 	height: 525px;
 }
