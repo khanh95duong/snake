@@ -2,11 +2,14 @@ window.addEventListener("keydown", move, false);
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var snakeSize = 25;
+var foodSize = 25;
 
 // State of game, true until game is over
 var game = true;
 // Flag if a food has been eaten
 var fed = false;
+// Flag to only draw food once per eating
+var foodDrawn = false;
 
 // Snake Location
 var x = 0;
@@ -15,6 +18,8 @@ var y = -25;
 // Screen dimensions
 var swidth = canvas.width;
 var sheight = canvas.height;
+var foodX = Math.floor(Math.random() * swidth);
+var foodY = Math.floor(Math.random() * sheight);
 
 // Direction variable
 // up = 1, right = 2, down = 3, left = 4
@@ -75,10 +80,34 @@ function move(e) {
     }
 }
 
-function drawHead() {
+function drawHead() {	
     ctx.beginPath();
     ctx.fillStyle = "#FF0000";
     ctx.rect(x, y, snakeSize, snakeSize);
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawFoods() {
+	var remainderX = foodX % 25;
+	var remainderY = foodY % 25;
+	if (remainderX <= 12) {
+		foodX -= remainderX;
+	}
+	else if (remainderX > 12) {
+		remainderX = 25 - remainderX;
+		foodX += remainderX;
+	}
+	if (remainderY <= 12) {
+		foodY -= remainderY;
+	}
+	else if (remainderY > 12) {
+		remainder = 25 - remainderY;
+		foodY += remainderY;
+	}
+	ctx.beginPath();
+    ctx.fillStyle = "#FF8C00";
+    ctx.rect(foodX, foodY, foodSize, foodSize);
     ctx.fill();
     ctx.stroke();
 }
@@ -97,10 +126,16 @@ function draw() {
             drawBody(bodies[i]);
         }
     }
+	if (fed === false) {
+		drawFoods();
+	}
 }
 
 function update() {
+	
     if (fed) {
+		foodX = Math.floor(Math.random() * swidth);
+		foodY = Math.floor(Math.random() * sheight);
         fed = false;
         for (i = 0; i < 5; i++) {
             var newBody = {
