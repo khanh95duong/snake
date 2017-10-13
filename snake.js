@@ -75,28 +75,28 @@ function drawBody(body) {
 
 function move(e) {
     switch (e.keyCode) {
-        case 37:
+        case 65:
             // left key pressed
             if (direction != 2 && !alreadyMove) {
 				direction = 4;
 				alreadyMove = true;
 			}
             break;
-        case 38:
+        case 87:
             // up key pressed
             if (direction != 3 && !alreadyMove) {
 				direction = 1;
 				alreadyMove = true;
 			}
             break;
-        case 39:
+        case 68:
             // right key pressed
             if (direction != 4 && !alreadyMove) {
 				direction = 2;
 				alreadyMove = true;
 			}
             break;
-        case 40:
+        case 83:
             // down key pressed
             if (direction != 1 && !alreadyMove) {
 				direction = 3;
@@ -184,6 +184,7 @@ function draw() {
 	// Continuously update the score and Time bonus
 	$("#scoreTracker").text("Score: " + score);
 	$("#bonusTracker").text("Time Bonus: " + bonus);
+	$("#totalTracker").text("Total: " + (score + bonus));
 }
 
 // This will reload the webpage

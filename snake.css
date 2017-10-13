@@ -36,6 +36,18 @@ article, header, footer, #container {
 	text-align: center;
 }
 
+h2, h3, p {
+	color: #CCCCCC;
+}
+
+body {
+	background-color: #006633;
+}
+
+#myCanvas {
+	background-color: white;
+}
+
 .path {
   position: relative;
   overflow: hidden;
