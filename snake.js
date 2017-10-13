@@ -107,6 +107,15 @@ function drawHead() {
     ctx.stroke();
 }
 
+function checkFood() {
+	for (j = 0; j < bodies.length; j++) {
+		if (foodX === bodies[j].bx && foodY === bodies[j].by) {
+			return true;
+		}
+	}
+	return false;
+}
+
 function calcFood() {
 	
 	if (foodX < 0) {
@@ -127,6 +136,11 @@ function calcFood() {
 	
 	foodX -= remainderX;
 	foodY -= remainderY;
+	
+	while (checkFood()) {
+		foodX = (foodX + 25) % swidth;
+		foodY = (foodY + 25) % sheight;
+	}
 	
 	/*if (remainderX <= 12) {
 		foodX -= remainderX;
