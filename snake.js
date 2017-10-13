@@ -96,9 +96,6 @@ function move(e) {
 				alreadyMove = true;
 			}
             break;
-        case 81:
-            fed = true;
-            break;
     }
 }
 
@@ -223,11 +220,6 @@ function win() {
 
 function update() {
 	if (!over) {
-		for (j = 1; j < bodies.length; j++) {
-			if (bodies[0].px === bodies[j].bx && bodies[0].py === bodies[j].by) {
-				youLose();
-			}
-		}
 		alreadyMove = false;
 		// The Eat
 		if (bodies[0].px === foodX && bodies[0].py === foodY) {
@@ -275,6 +267,11 @@ function update() {
 				break;
 		}
 		draw();
+		for (j = 1; j < bodies.length; j++) {
+			if (x === bodies[j].bx && y === bodies[j].by) {
+				youLose();
+			}
+		}
 		second++;
 		if (second === 6) {
 			second = 0;
