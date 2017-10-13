@@ -8,7 +8,8 @@ footer img {
 	height: 525px;
 }
 
-#container, {
+#box {
+	position: absolute
 	float: left;
 }
 #btn {
@@ -28,10 +29,13 @@ footer img {
 }
 
 #animation {
-float: right;
-  margin: auto;
-  width: 80%;
-  background-color: transparent;
+	margin: auto;
+	margin-bottom: 20px;
+	background-color: transparent;
+}
+
+article, header, footer {
+	text-align: center;
 }
 
 .path {
