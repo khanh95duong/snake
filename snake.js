@@ -12,6 +12,7 @@ var fed = false;
 // Is the game over
 var over = false;
 var fadeOnce = false;
+var alreadyMove = false;
 
 // Snake Location
 var x = 0;
@@ -62,19 +63,31 @@ function move(e) {
     switch (e.keyCode) {
         case 37:
             // left key pressed
-            if (direction != 2) direction = 4;
+            if (direction != 2 && !alreadyMove) {
+				direction = 4;
+				alreadyMove = true;
+			}
             break;
         case 38:
             // up key pressed
-            if (direction != 3) direction = 1;
+            if (direction != 3 && !alreadyMove) {
+				direction = 1;
+				alreadyMove = true;
+			}
             break;
         case 39:
             // right key pressed
-            if (direction != 4) direction = 2;
+            if (direction != 4 && !alreadyMove) {
+				direction = 2;
+				alreadyMove = true;
+			}
             break;
         case 40:
             // down key pressed
-            if (direction != 1) direction = 3;
+            if (direction != 1 && !alreadyMove) {
+				direction = 3;
+				alreadyMove = true;
+			}
             break;
         case 81:
             fed = true;
@@ -91,9 +104,6 @@ function drawHead() {
 }
 
 function drawFoods() {
-	var remainderX = foodX % 25;
-	var remainderY = foodY % 25;
-	var j = 0;
 	
 	if (foodX < 0) {
 		foodX *= -1;
@@ -101,7 +111,6 @@ function drawFoods() {
 	if (foodY < 0) {
 		foodY *= -1;
 	}
-	
 	if (foodX + 25 > swidth) {
 		foodX = swidth - 25;
 	}
@@ -109,12 +118,8 @@ function drawFoods() {
 		foodY = sheight - 25;
 	}
 	
-	//while (foodX + 50 >= swidth || foodX <= 0) {
-	//	foodX = Math.floor(Math.random() * swidth);
-	//}
-	//while (foodY + 50 >= swidth || foodY <= 0) {
-	//	foodY = Math.floor(Math.random() * swidth);
-	//}
+	var remainderX = foodX % 25;
+	var remainderY = foodY % 25;
 	
 	if (remainderX <= 12) {
 		foodX -= remainderX;
@@ -163,6 +168,7 @@ function reLoad() {
 
 // This will handle the out of bounds stuff
 function youLose() {
+<<<<<<< HEAD
 	if (!over) {
 		over = true;
 	}
