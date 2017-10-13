@@ -23,12 +23,14 @@ var score = 0;
 var bonus = 30000;
 var second = 0;
 var eaten = 0;
+// Score counter
 var start;
 var elapsed;
 
 // Screen dimensions
 var swidth = canvas.width;
 var sheight = canvas.height;
+// Calculate what the x,y position of the food will be
 var foodX = Math.floor(Math.random() * swidth);
 var foodY = Math.floor(Math.random() * sheight);
 
@@ -38,21 +40,25 @@ var direction;
 
 var bodies = [];
 
+// A snake has a body and x and y coordinate
 function constructor(body, xx, yy) {
     body.px = xx;
     body.py = yy;
 }
 
+// New parent for the body parts
 function newparent(body, parent) {
     body.px = parent.bx;
     body.py = parent.by;
 }
 
+// New parent, but for the first body part
 function np(body) {
     body.px = x;
     body.py = y;
 }
 
+// Update the moves
 function shift(body) {
     body.bx = body.px;
     body.by = body.py;
@@ -100,6 +106,7 @@ function move(e) {
     }
 }
 
+// Draws the head, it is red
 function drawHead() {	
     ctx.beginPath();
     ctx.fillStyle = "#FF0000";
@@ -108,6 +115,7 @@ function drawHead() {
     ctx.stroke();
 }
 
+// Don't spawn a food on the snake
 function checkFood() {
 	for (j = 0; j < bodies.length; j++) {
 		if (foodX === bodies[j].bx && foodY === bodies[j].by) {
@@ -117,6 +125,7 @@ function checkFood() {
 	return false;
 }
 
+// Calculate where the next food will be
 function calcFood() {
 	
 	if (foodX < 0) {
@@ -143,22 +152,9 @@ function calcFood() {
 		foodY = (foodY + 25) % sheight;
 	}
 	
-	/*if (remainderX <= 12) {
-		foodX -= remainderX;
-	}
-	else if (remainderX > 12) {
-		remainderX = 25 - remainderX;
-		foodX += remainderX;
-	}
-	if (remainderY <= 12) {
-		foodY -= remainderY;
-	}
-	else if (remainderY > 12) {
-		remainder = 25 - remainderY;
-		foodY += remainderY;
-	} */
 }
 
+// Draws a food
 function drawFood() {
 	ctx.beginPath();
     ctx.fillStyle = "#FF8C00";
@@ -181,9 +177,11 @@ function draw() {
             drawBody(bodies[i]);
         }
     }
+	// Checks if the snake ate a food
 	if (fed === false) {
 		drawFood();
 	}
+	// Continuously update the score and Time bonus
 	$("#scoreTracker").text("Score: " + score);
 	$("#bonusTracker").text("Time Bonus: " + bonus);
 }
@@ -216,6 +214,7 @@ function unfade(element) {
     }, 10);
 	
 	$("#myCanvas").hide();
+	highscore(score + bonus);
 }
 
 function win() {
@@ -223,6 +222,7 @@ function win() {
 }
 
 function update() {
+	// If the game is not over nor haven't lost
 	if (!over && !loss) {
 		alreadyMove = false;
 		// The Eat
@@ -239,7 +239,7 @@ function update() {
 			}
 			fed = true;
 		}
-
+		// If the snake ate a thingy
 		if (fed) {
 			fed = false;
 			for (i = 0; i < 5; i++) {
@@ -252,6 +252,7 @@ function update() {
 				bodies[bodies.length] = newBody;
 			}
 		}
+		// Directions
 		switch (direction) {
 			case 1:
 				if (y === 0) youLose();
@@ -285,6 +286,7 @@ function update() {
 			}
 		}
 	}
+	// When you lose the game
 	else if (loss){
 		if (!fadeOnce) {
 			fadeOnce = true;
@@ -294,6 +296,7 @@ function update() {
 
 }
 
+// Init the canvas on button press
 function init() {
 	start = new Date();
     if (direction == null) {
@@ -309,3 +312,8 @@ function init() {
 		calcFood();
     }
 }
+
+// This is commented so that you can test it.  If you uncomment it,
+// You should be able to test if the scores update correctly.
+
+//window.onload = update_scores();

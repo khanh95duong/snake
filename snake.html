@@ -5,8 +5,10 @@
     <title>JS Snake</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="snake.css" />
+	<link rel="stylesheet" type="text/css" href="highscore.css" />
     <meta charset="UTF-8">
 	<script src="./jquery-3.2.1.min.js"></script>
+	<script src="./HighscoreAPI.js"></script>
 </head>
 
 <body>
@@ -32,13 +34,32 @@
 		<script src="snake.js"></script>
 		
 		<div id="score">
-			<h2 id="scoreTracker">Score: 0</h2>
-			<h2 id="bonusTracker">Time Bonus: 30000</h2>
+			<h3 id="scoreTracker">Score: 0</h3>
+			<h3 id="bonusTracker">Time Bonus: 30000</h3>
 		</div>
 		
 	</article>
-    
+    <hr/>
+	<article>
+		<h3>Highscores</h3>
+		<div id="highdiv">
+			<table id="hightable">
+				<tr>
+					<th>User</th>
+					<th>Score</th>
+				</tr>
 
+			</table>
+			<table id="myhightable">
+				<tr>
+					<th colspan="2">Your High Score</th>
+				</tr>
+				<tr id="myhighscore">
+					<td colspan="2">You don't have one yet!</td>
+				</tr>
+			</table>
+		</div>
+	</article>
     <footer>
         <p>Copyright 2017 TeeBeeDee Inc.</p>
         <img src="images/html5.png" alt="HTML Validation" />
