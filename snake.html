@@ -11,21 +11,29 @@
 
 <body>
     <header>
-        <h1>Snake</h1>
+        <h1 id="title">Snake</h1>
     </header>
     <hr />
 
-    <article>
-        <h2>Game Window</h2>
-		<div id="container">
-			<img id="gameLost" src="images/lose.png" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
-			<img id="gameWon" src="images/won.jpg" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
-			<canvas id="myCanvas" width="500" height="500" style="border: 2px solid black"></canvas>
+	<div>
+		<article>
+			<h2>Game Window</h2>
+			<div id="container">
+				<img id="gameLost" src="images/lose.png" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
+				<img id="gameWon" src="images/won.jpg" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
+				<canvas id="myCanvas" width="500" height="500" style="border: 2px solid black"></canvas>
+			</div>
+			<br />
+			<button id='btn' onclick="init()">START!</button>
+			<script src="snake.js"></script>
+		</article>
+		<div id="animation">
+			<div class="path">
+				<span id="elem" class="shape trail"></span> 
+			</div>
 		</div>
-        <br />
-        <button id='btn' onclick="init()">START!</button>
-        <script src="snake.js"></script>
-    </article>
+	</div>
+    
 
     <footer>
         <p>Copyright 2017 TeeBeeDee Inc.</p>
