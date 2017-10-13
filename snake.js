@@ -14,10 +14,11 @@ var over = false;
 var fadeOnce = false;
 var alreadyMove = false;
 
-// Snake Location
+// Snake variables
 var x = 0;
 var y = -25;
 var score = 0;
+var eaten = 0;
 var start;
 var elapsed;
 
@@ -201,6 +202,9 @@ function unfade(element) {
     }, 10);
 }
 
+function win() {
+}
+
 function update() {
 	if (!over) {
 		for (j = 1; j < bodies.length; j++) {
@@ -216,6 +220,10 @@ function update() {
 			calcFood();
 			drawFood();
 			score += 10000;
+			eaten += 1;
+			if (eaten === 20) {
+				win();
+			}
 			fed = true;
 		}
 
