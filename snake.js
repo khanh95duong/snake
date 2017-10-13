@@ -156,17 +156,19 @@ function draw() {
 	}
 }
 
+// This will reload the webpage
+function reLoad() {
+	location.reload();
+}
+
 // This will handle the out of bounds stuff
 function youLose() {
-	if (!over) {	
-		//alert("out");
+	if (!over) {
 		over = true;
-		document.getElementById("game").src = "images/victory.jpg";
-		//$("#game").fadeIn("slow");
-		//$("#game").fadeIn();
 	}
 }
 
+// This will fade the picture in
 function unfade(element) {
     var op = 0.1;  // initial opacity
     element.style.display = 'block';
