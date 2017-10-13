@@ -10,6 +10,8 @@ var game = true;
 var fed = false;
 // Flag to only draw food once per eating
 var foodDrawn = false;
+// Is the game over
+var over = false;
 
 // Snake Location
 var x = 0;
@@ -60,19 +62,19 @@ function move(e) {
     switch (e.keyCode) {
         case 37:
             // left key pressed
-            direction = 4;
+            if (direction != 2) direction = 4;
             break;
         case 38:
             // up key pressed
-            direction = 1;
+            if (direction != 3) direction = 1;
             break;
         case 39:
             // right key pressed
-            direction = 2;
+            if (direction != 4) direction = 2;
             break;
         case 40:
             // down key pressed
-            direction = 3;
+            if (direction != 1) direction = 3;
             break;
         case 81:
             fed = true;
@@ -131,6 +133,15 @@ function draw() {
 	}
 }
 
+// This will handle the out of bounds stuff
+function youLose() {
+	if (!over) {
+		alert("out");
+		over = true;
+	}
+	
+}
+
 function update() {
 	
     if (fed) {
@@ -149,15 +160,19 @@ function update() {
     }
     switch (direction) {
         case 1:
+			if (y === 0) youLose();
             y -= 25;
             break;
         case 2:
             x += 25;
+			if (x === swidth) youLose();
             break;
         case 3:
             y += 25;
+			if (y === sheight) youLose();
             break;
         case 4:
+			if (x === 0) youLose();
             x -= 25;
             break;
     }
