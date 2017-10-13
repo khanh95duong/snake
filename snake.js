@@ -18,6 +18,8 @@ var alreadyMove = false;
 var x = 0;
 var y = -25;
 var score = 0;
+var bonus = 30000;
+var second = 0;
 var eaten = 0;
 var start;
 var elapsed;
@@ -183,6 +185,8 @@ function draw() {
 	if (fed === false) {
 		drawFood();
 	}
+	$("#scoreTracker").text("Score: " + score);
+	$("#bonusTracker").text("Time Bonus: " + bonus);
 }
 
 // This will reload the webpage
@@ -194,10 +198,6 @@ function reLoad() {
 function youLose() {
 	elapsed = new Date() - start;
 	if (!over) {	
-		alert("Game the fuck over");
-		alert("Your fucking score is " + score);
-		alert("Your fucking time is " + elapsed + "in miliseconds.");
-		alert("Otherwise known as " + elapsed / 1000.0 + " fucking seconds, idiot");
 		over = true;
 	}
 }
@@ -233,7 +233,7 @@ function update() {
 			foodY = Math.floor(Math.random() * sheight);
 			calcFood();
 			drawFood();
-			score += 10000;
+			score += 100000;
 			eaten += 1;
 			if (eaten === 20) {
 				win();
@@ -272,6 +272,14 @@ function update() {
 				break;
 		}
 		draw();
+		second++;
+		if (second === 6) {
+			second = 0;
+			bonus -= 10;
+			if (bonus < 0) {
+				bonus = 0;
+			}
+		}
 	}
 	else {
 		if (!fadeOnce) {
