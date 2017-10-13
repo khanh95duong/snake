@@ -135,11 +135,14 @@ function draw() {
 
 // This will handle the out of bounds stuff
 function youLose() {
-	if (!over) {
+	if (!over) {	
 		alert("out");
 		over = true;
 	}
-	
+}
+
+function fade() {
+	$("game").fadeIn();
 }
 
 function update() {
