@@ -102,7 +102,7 @@ function drawHead() {
     ctx.stroke();
 }
 
-function drawFoods() {
+function calcFood() {
 	
 	if (foodX < 0) {
 		foodX *= -1;
@@ -120,7 +120,10 @@ function drawFoods() {
 	var remainderX = foodX % 25;
 	var remainderY = foodY % 25;
 	
-	if (remainderX <= 12) {
+	foodX -= remainderX;
+	foodY -= remainderY;
+	
+	/*if (remainderX <= 12) {
 		foodX -= remainderX;
 	}
 	else if (remainderX > 12) {
@@ -133,7 +136,10 @@ function drawFoods() {
 	else if (remainderY > 12) {
 		remainder = 25 - remainderY;
 		foodY += remainderY;
-	}
+	} */
+}
+
+function drawFood() {
 	ctx.beginPath();
     ctx.fillStyle = "#FF8C00";
     ctx.rect(foodX, foodY, foodSize, foodSize);
@@ -156,7 +162,7 @@ function draw() {
         }
     }
 	if (fed === false) {
-		drawFoods();
+		drawFood();
 	}
 }
 
@@ -180,14 +186,16 @@ function update() {
 		}
 	}
 	alreadyMove = false;
+	// The Eat
 	if (bodies[0].px === foodX && bodies[0].py === foodY) {
 		foodX = Math.floor(Math.random() * swidth);
 		foodY = Math.floor(Math.random() * sheight);
+		calcFood();
+		drawFood();
 		fed = true;
 	}
 
     if (fed) {
-		drawFoods();
         fed = false;
         for (i = 0; i < 5; i++) {
             var newBody = {
@@ -231,5 +239,6 @@ function init() {
             py: -100
         }
         bodies[0] = newBody;
+		calcFood();
     }
 }
