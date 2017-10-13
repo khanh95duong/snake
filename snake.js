@@ -17,6 +17,9 @@ var alreadyMove = false;
 // Snake Location
 var x = 0;
 var y = -25;
+var score = 0;
+var start;
+var elapsed;
 
 // Screen dimensions
 var swidth = canvas.width;
@@ -174,7 +177,12 @@ function reLoad() {
 
 // This will handle the out of bounds stuff
 function youLose() {
-	if (!over) {
+	elapsed = new Date() - start;
+	if (!over) {	
+		alert("Game the fuck over");
+		alert("Your fucking score is " + score);
+		alert("Your fucking time is " + elapsed + "in miliseconds.");
+		alert("Otherwise known as " + elapsed / 1000.0 + " fucking seconds, idiot");
 		over = true;
 	}
 }
@@ -195,6 +203,11 @@ function unfade(element) {
 
 function update() {
 	if (!over) {
+		for (j = 1; j < bodies.length; j++) {
+			if (bodies[0].px === bodies[j].bx && bodies[0].py === bodies[j].by) {
+				youLose();
+			}
+		}
 		alreadyMove = false;
 		// The Eat
 		if (bodies[0].px === foodX && bodies[0].py === foodY) {
@@ -202,6 +215,7 @@ function update() {
 			foodY = Math.floor(Math.random() * sheight);
 			calcFood();
 			drawFood();
+			score += 10000;
 			fed = true;
 		}
 
@@ -247,6 +261,7 @@ function update() {
 }
 
 function init() {
+	start = new Date();
     if (direction == null) {
         direction = 3;
         setInterval("update()", 100);
