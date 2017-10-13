@@ -89,8 +89,6 @@ function drawHead() {
 }
 
 function drawFoods() {
-	var remainderX = foodX % 25;
-	var remainderY = foodY % 25;
 	var j = 0;
 	
 	if (foodX < 0) {
@@ -100,19 +98,8 @@ function drawFoods() {
 		foodY *= -1;
 	}
 	
-	if (foodX + 25 > swidth) {
-		foodX = swidth - 25;
-	}
-	if (foodY + 25 > sheight) {
-		foodY = sheight - 25;
-	}
-	
-	//while (foodX + 50 >= swidth || foodX <= 0) {
-	//	foodX = Math.floor(Math.random() * swidth);
-	//}
-	//while (foodY + 50 >= swidth || foodY <= 0) {
-	//	foodY = Math.floor(Math.random() * swidth);
-	//}
+	var remainderX = foodX % 25;
+	var remainderY = foodY % 25;
 	
 	if (remainderX <= 12) {
 		foodX -= remainderX;
@@ -128,6 +115,15 @@ function drawFoods() {
 		remainder = 25 - remainderY;
 		foodY += remainderY;
 	}
+	
+	
+	if (foodX + 25 > swidth) {
+		foodX = swidth - 25;
+	}
+	if (foodY + 25 > sheight) {
+		foodY = sheight - 25;
+	}
+	
 	ctx.beginPath();
     ctx.fillStyle = "#FF8C00";
     ctx.rect(foodX, foodY, foodSize, foodSize);
@@ -157,7 +153,7 @@ function draw() {
 // This will handle the out of bounds stuff
 function youLose() {
 	if (!over) {	
-		alert("out");
+		alert("Game the fuck over");
 		over = true;
 	}
 }
@@ -167,6 +163,12 @@ function fade() {
 }
 
 function update() {
+	var j = 0;
+	for (j = 1; j < bodies.length; j++) {
+		if (bodies[0].px === bodies[j].bx && bodies[0].py === bodies[j].by) {
+			youLose();
+		}
+	}
 	
 	if (bodies[0].px === foodX && bodies[0].py === foodY) {
 		foodX = Math.floor(Math.random() * swidth);
