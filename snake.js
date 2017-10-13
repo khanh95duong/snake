@@ -1,6 +1,7 @@
 window.addEventListener("keydown", move, false);
 var canvas = document.getElementById("myCanvas");
-var img = document.getElementById("game");
+var img1 = document.getElementById("gameWon");
+var img2 = document.getElementById("gameLost");
 var ctx = canvas.getContext("2d");
 var snakeSize = 25;
 var foodSize = 25;
@@ -217,6 +218,7 @@ function unfade(element) {
 }
 
 function win() {
+	unfade(img1);
 }
 
 function update() {
@@ -236,6 +238,7 @@ function update() {
 			score += 100000;
 			eaten += 1;
 			if (eaten === 20) {
+				over = true;
 				win();
 			}
 			fed = true;
@@ -284,7 +287,7 @@ function update() {
 	else {
 		if (!fadeOnce) {
 			fadeOnce = true;
-			unfade(img);
+			unfade(img2);
 		}
 	}
 
