@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="snake.css" />
     <meta charset="UTF-8">
-	<script src="./HighscoreAPI/jquery-3.2.1.min.js"></script>
+	<script src="./jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -15,9 +15,10 @@
     </header>
     <hr />
 
-	<div>
-		<article>
-			<h2>Game Window</h2>
+	<article>
+		<h2>Game Window</h2>
+		<div>
+			
 			<div id="container">
 				<img id="gameLost" src="images/lose.png" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
 				<img id="gameWon" src="images/won.jpg" alt="_blank" onclick="reLoad()" style="z-index: 10; position:absolute; display: none;"/>
@@ -26,13 +27,18 @@
 			<br />
 			<button id='btn' onclick="init()">START!</button>
 			<script src="snake.js"></script>
-		</article>
+			
+			<div id="score">
+				<h2 id="scoreTracker">Score: 0</h2>
+				<h2 id="bonusTracker">Time Bonus: 30000</h2>
+			</div>
+		</div>
 		<div id="animation">
 			<div class="path">
 				<span id="elem" class="shape trail"></span> 
 			</div>
 		</div>
-	</div>
+	</article>
     
 
     <footer>

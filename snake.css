@@ -11,13 +11,15 @@ footer img {
 #container, {
 	float: left;
 }
-#id {
-	width: 20px;
-	transition: width 2s;
+#btn {
+	width: 60px;
+	height: 40px;
+	transition: width 1s, height 1s;
 }
 
-#id:hover {
+#btn:hover {
 	width: 100px;
+	height: 60px;
 }
 
 #title {
