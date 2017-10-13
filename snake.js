@@ -8,8 +8,6 @@ var foodSize = 25;
 var game = true;
 // Flag if a food has been eaten
 var fed = false;
-// Flag to only draw food once per eating
-var foodDrawn = false;
 // Is the game over
 var over = false;
 
@@ -93,6 +91,29 @@ function drawHead() {
 function drawFoods() {
 	var remainderX = foodX % 25;
 	var remainderY = foodY % 25;
+	var j = 0;
+	
+	if (foodX < 0) {
+		foodX *= -1;
+	}
+	if (foodY < 0) {
+		foodY *= -1;
+	}
+	
+	if (foodX + 25 > swidth) {
+		foodX = swidth - 25;
+	}
+	if (foodY + 25 > sheight) {
+		foodY = sheight - 25;
+	}
+	
+	//while (foodX + 50 >= swidth || foodX <= 0) {
+	//	foodX = Math.floor(Math.random() * swidth);
+	//}
+	//while (foodY + 50 >= swidth || foodY <= 0) {
+	//	foodY = Math.floor(Math.random() * swidth);
+	//}
+	
 	if (remainderX <= 12) {
 		foodX -= remainderX;
 	}
@@ -147,9 +168,14 @@ function fade() {
 
 function update() {
 	
-    if (fed) {
+	if (bodies[0].px === foodX && bodies[0].py === foodY) {
 		foodX = Math.floor(Math.random() * swidth);
 		foodY = Math.floor(Math.random() * sheight);
+		fed = true;
+	}
+
+    if (fed) {
+		drawFoods();
         fed = false;
         for (i = 0; i < 5; i++) {
             var newBody = {
